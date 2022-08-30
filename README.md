@@ -1,5 +1,8 @@
 > This tutorial is a modified version of the original developed by [Kelsey Hightower](https://github.com/kelseyhightower/kubernetes-the-hard-way).
 
+I'm using this guide to bootstrap a k8s cluster on XCP-ng. I'm using this to prepare to study for CKA exam. 
+
+
 # Kubernetes The Hard Way On VirtualBox
 
 This tutorial walks you through setting up Kubernetes the hard way on a local machine using VirtualBox.
