@@ -2,13 +2,13 @@
 > 1. That you can architech your own hypervisor and underlying networking components to get everything working. 
 > 2. that you're somewhat familiar with ansible and 
 For a more hands on aproach please follow one of the original tutorials. [Mumshad Mannambeth's Tutorial here](https://github.com/mmumshad/kubernetes-the-hard-way)
-> I'll be using the latest verions of the packaging. As I'm updating this document as I'm going some links / refs may not be current. I'll include the step I'm currently working through so if you'd like you can follow along.
+> I'll be using the latest verions of the packaging. As I'm updating this document as I'm going some links / refs may not be current. I'll include the step I'm currently working through so if you'd like you can follow along.  
 > Step 2: Computre Resources
 
 
 
 
-# Kubernetes The Hard Way On VirtualBox
+# Kubernetes The Hard Way using XCP-ng
 
 This tutorial walks you through setting up Kubernetes the hard way on a local machine using XCP-NG.
 This guide is not for people looking for a fully automated command to bring up a Kubernetes cluster.

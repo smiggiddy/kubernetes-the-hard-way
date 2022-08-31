@@ -45,36 +45,14 @@ you'll need to use the ssh keys to get into the vm's if you used the templates.
 ## Verify Environment
 
 - Ensure all VMs are up
-- Ensure VMs are assigned the above IP addresses
-- Ensure you can SSH into these VMs using the IP and private keys
+- Ensure VMs are assigned the IP addresses via dhcp server
+- Ensure you can SSH into these VMs using the IP and private keys (run svc-ansible provision playbook)
 - Ensure the VMs can ping each other
-- Ensure the worker nodes have Docker installed on them. Version: 18.06
+- Ensure the worker nodes have Docker installed on them. (run docker playbook)
+    - Version: 19.03.8
   > command `sudo docker version`
 
-## Troubleshooting Tips
-
-1. If any of the VMs failed to provision, or is not configured correct, delete the vm using the command:
-
-`vagrant destroy <vm>`
-
-Then reprovision. Only the missing VMs will be re-provisioned
-
-`vagrant up`
 
 
-Sometimes the delete does not delete the folder created for the vm and throws the below error.
 
-VirtualBox error:
-
-    VBoxManage.exe: error: Could not rename the directory 'D:\VirtualBox VMs\ubuntu-bionic-18.04-cloudimg-20190122_1552891552601_76806' to 'D:\VirtualBox VMs\kubernetes-ha-worker-2' to save the settings file (VERR_ALREADY_EXISTS)
-    VBoxManage.exe: error: Details: code E_FAIL (0x80004005), component SessionMachine, interface IMachine, callee IUnknown
-    VBoxManage.exe: error: Context: "SaveSettings()" at line 3105 of file VBoxManageModifyVM.cpp
-
-In such cases delete the VM, then delete the VM folder and then re-provision
-
-`vagrant destroy <vm>`
-
-`rmdir "<path-to-vm-folder>\kubernetes-ha-worker-2"`
-
-`vagrant up`
 

@@ -1,0 +1,10 @@
+---
+- name: ensure latest packages are on machine 
+  hosts: k8s 
+  become: true 
+  tasks:
+    - name: ensure updated system 
+      apt:
+        pkg: "*"
+        state: latest
+        update_cache: yes 
