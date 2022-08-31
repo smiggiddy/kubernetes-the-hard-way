@@ -2,27 +2,18 @@
 
 ## VM Hardware Requirements
 
-8 GB of RAM (Preferably 16 GB)
-50 GB Disk space
+Plenty of RamRAM (Preferably 32 GB or more)
+Lots of Hard Disk space (Atleast 500GB)
 
-## Virtual Box
+## XCP-NG 
 
-Download and Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads) on any one of the supported platforms:
+Download and Install [XCP-NG](https://xcp-ng.org/#easy-to-install) be sure to check to make sure your hardware is compatible with XCP-NG.
 
- - Windows hosts
- - OS X hosts
- - Linux distributions
- - Solaris hosts
+Then deploy Xen Orchestra from sources.
 
-## Vagrant
+## Ansible
 
-Once VirtualBox is installed you may chose to deploy virtual machines manually on it.
-Vagrant provides an easier way to deploy multiple virtual machines on VirtualBox more consistenlty.
+I will be including the playbooks I wrote to bootstrap this process. You can either run the playbooks I wrote or create your own. 
 
-Download and Install [Vagrant](https://www.vagrantup.com/) on your platform.
 
-- Windows
-- Debian
-- Centos
-- Linux
-- macOS
+

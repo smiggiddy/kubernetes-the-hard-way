@@ -1,20 +1,22 @@
-> This tutorial is a modified version of the original developed by [Kelsey Hightower](https://github.com/kelseyhightower/kubernetes-the-hard-way).
+> This tutorial is a modified version of the original developed by [Kelsey Hightower](https://github.com/kelseyhightower/kubernetes-the-hard-way). As well as a modified version of the KodeKloud version. I'm using this guide to bootstrap a k8s cluster on XCP-ng. I'm using this to prepare to study for CKA exam. Please feel free to follow along, but this guide will include a few assumptions:
+> 1. That you can architech your own hypervisor and underlying networking components to get everything working. For a more hands on aproach please follow one of the original tutorials. [
+Mumshad Mannambeth's Tutorial here](https://github.com/mmumshad/kubernetes-the-hard-way)
 
-I'm using this guide to bootstrap a k8s cluster on XCP-ng. I'm using this to prepare to study for CKA exam. 
+
 
 
 # Kubernetes The Hard Way On VirtualBox
 
-This tutorial walks you through setting up Kubernetes the hard way on a local machine using VirtualBox.
+This tutorial walks you through setting up Kubernetes the hard way on a local machine using XCP-NG.
 This guide is not for people looking for a fully automated command to bring up a Kubernetes cluster.
 If that's you then check out [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine), or the [Getting Started Guides](http://kubernetes.io/docs/getting-started-guides/).
 
 Kubernetes The Hard Way is optimized for learning, which means taking the long route to ensure you understand each task required to bootstrap a Kubernetes cluster.
 
 This tutorial is a modified version of the original developed by [Kelsey Hightower](https://github.com/kelseyhightower/kubernetes-the-hard-way).
-While the original one uses GCP as the platform to deploy kubernetes,  we use VirtualBox and Vagrant to deploy a cluster on a local machine. If you prefer the cloud version, refer to the original one [here](https://github.com/kelseyhightower/kubernetes-the-hard-way)
+While the original one uses GCP as the platform to deploy kubernetes,  I use XCP-NG and Ansible to deploy a cluster on a networked machine. If you prefer the cloud version, refer to the original one [here](https://github.com/kelseyhightower/kubernetes-the-hard-way)
 
-Another difference is that we use Docker instead of containerd. There are a few other differences to the original and they are documented [here](docs/differences-to-original.md)
+<!-- Another difference is that we use Docker instead of containerd. There are a few other differences to the original and they are documented [here](docs/differences-to-original.md) -->
 
 > The results of this tutorial should not be viewed as production ready, and may receive limited support from the community, but don't let that stop you from learning!
 
@@ -26,7 +28,7 @@ The target audience for this tutorial is someone planning to support a productio
 
 Kubernetes The Hard Way guides you through bootstrapping a highly available Kubernetes cluster with end-to-end encryption between components and RBAC authentication.
 
-* [Kubernetes](https://github.com/kubernetes/kubernetes) 1.13.0
+* [Kubernetes](https://github.com/kubernetes/kubernetes) v1.25.0
 * [Docker Container Runtime](https://github.com/containerd/containerd) 18.06
 * [CNI Container Networking](https://github.com/containernetworking/cni) 0.7.5
 * [Weave Networking](https://www.weave.works/docs/net/latest/kubernetes/kube-addon/)
