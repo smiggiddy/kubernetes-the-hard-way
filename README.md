@@ -1,6 +1,9 @@
-> This tutorial is a modified version of the original developed by [Kelsey Hightower](https://github.com/kelseyhightower/kubernetes-the-hard-way). As well as a modified version of the KodeKloud version. I'm using this guide to bootstrap a k8s cluster on XCP-ng. I'm using this to prepare to study for CKA exam. Please feel free to follow along, but this guide will include a few assumptions:
-> 1. That you can architech your own hypervisor and underlying networking components to get everything working. For a more hands on aproach please follow one of the original tutorials. [
-Mumshad Mannambeth's Tutorial here](https://github.com/mmumshad/kubernetes-the-hard-way)
+> This tutorial is a modified version of the original developed by [Kelsey Hightower](https://github.com/kelseyhightower/kubernetes-the-hard-way) and [Mumshad Mannambeth](https://github.com/mmumshad/kubernetes-the-hard-way). As well as a modified version of the KodeKloud version. I'm using this guide to bootstrap a k8s cluster on XCP-ng. I'm using this to prepare to study for CKA exam. Please feel free to follow along, but this guide will include a few assumptions:
+> 1. That you can architech your own hypervisor and underlying networking components to get everything working. 
+> 2. that you're somewhat familiar with ansible and 
+For a more hands on aproach please follow one of the original tutorials. [Mumshad Mannambeth's Tutorial here](https://github.com/mmumshad/kubernetes-the-hard-way)
+> I'll be using the latest verions of the packaging. As I'm updating this document as I'm going some links / refs may not be current. I'll include the step I'm currently working through so if you'd like you can follow along.
+> Step 2: Computre Resources
 
 
 
