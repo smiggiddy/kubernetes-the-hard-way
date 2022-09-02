@@ -49,7 +49,7 @@ you'll need to use the ssh keys to get into the vm's if you used the templates.
 - Ensure you can SSH into these VMs using the IP and private keys (run svc-ansible provision playbook)
 - Ensure the VMs can ping each other
 - Ensure the worker nodes have Docker installed on them. (run docker playbook)
-    - Version: 19.03.8
+    - Version: Docker version 20.10.17, build 100c701 
   > command `sudo docker version`
 
 

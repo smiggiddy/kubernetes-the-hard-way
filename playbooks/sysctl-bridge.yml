@@ -1,0 +1,10 @@
+---
+- name: Setup bridge kernel params for bridge 
+  hosts: k8s_workers  
+  become: true 
+  tasks:
+    - name: add bridge-nf-call-iptables=1 
+      sysctl: 
+        name: net.bridge.bridge-nf-call-iptables
+        value: '1'
+        state: present

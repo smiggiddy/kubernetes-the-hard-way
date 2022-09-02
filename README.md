@@ -3,7 +3,7 @@
 > 2. that you're somewhat familiar with ansible and 
 For a more hands on aproach please follow one of the original tutorials. [Mumshad Mannambeth's Tutorial here](https://github.com/mmumshad/kubernetes-the-hard-way)
 > I'll be using the latest verions of the packaging. As I'm updating this document as I'm going some links / refs may not be current. I'll include the step I'm currently working through so if you'd like you can follow along.  
-> Step 2: Computre Resources
+> Step 5 k8s configuration
 
 
 
