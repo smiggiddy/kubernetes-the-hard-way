@@ -1,0 +1,5 @@
+- name: setup kube control plane services 
+  hosts: k8s_cp 
+  become: true 
+  roles: 
+    - kubernetes-control-plane 

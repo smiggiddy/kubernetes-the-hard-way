@@ -1,0 +1,6 @@
+---
+- name: install kubectl on control plane nodes 
+  hosts: k8s_cp 
+  become: true 
+  roles: 
+    - kubectl 

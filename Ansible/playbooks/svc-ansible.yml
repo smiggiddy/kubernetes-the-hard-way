@@ -1,0 +1,28 @@
+- name: provision service accounts and user accounts  
+  hosts: k8s
+  become: true 
+  tasks:
+    - name: provision svc-ansible user across nodes  
+      user: 
+        name: "{{ item }}"
+        # group: "{{ item }}"
+        groups: sudo 
+        shell: /bin/bash
+        password: <add pw hash>
+      loop: 
+        - svc-ansible 
+       
+    - name: copy ssh key 
+      authorized_key: 
+        user: svc-ansible
+        state: present
+        key: "{{ lookup('file', '<pub_key_file_path') }}"
+
+    - name: Passwordless sudo for admin users
+      lineinfile: 
+        path: "/etc/sudoers.d/{{ item }}"
+        state: present 
+        create: yes 
+        line: 'svc-ansible ALL=(ALL) NOPASSWD:ALL' 
+      loop:
+        - svc-ansible 

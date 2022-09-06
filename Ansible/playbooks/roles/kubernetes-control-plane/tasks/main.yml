@@ -1,0 +1,93 @@
+- name: create k8s config directory 
+  file: 
+    path: /etc/kubernetes/config
+    state: directory 
+    owner: root
+    group: root 
+
+- name: download files for control plane 
+  get_url: 
+    url: "{{ item }}"
+    dest: /home/svc-ansible 
+  loop: 
+    - https://dl.k8s.io/v1.23.0/bin/linux/amd64/kube-apiserver
+    - https://dl.k8s.io/v1.23.0/bin/linux/amd64/kube-controller-manager 
+    - https://dl.k8s.io/v1.23.0/bin/linux/amd64/kube-scheduler 
+    - https://dl.k8s.io/v1.23.0/bin/linux/amd64/kubectl 
+
+
+- name: move binaries and set permissions 
+  copy: 
+    src: "{{ item }}"
+    dest: /usr/local/bin 
+    mode: '0755'
+    remote_src: true 
+  loop: 
+    - /home/svc-ansible/kube-apiserver 
+    - /home/svc-ansible/kube-scheduler
+    - /home/svc-ansible/kubectl
+    - /home/svc-ansible/kube-controller-manager 
+
+- name: configure the Api Server 
+  copy: 
+    src: "{{ item }}"
+    dest: /var/lib/kubernetes/ 
+    remote_src: true 
+  loop: 
+    - /home/ubuntu/certs/certificate_authority/ca.crt
+    - /home/ubuntu/certs/certificate_authority/ca.key 
+    - /home/ubuntu/certs/kube-apiserver/kube-apiserver.crt
+    - /home/ubuntu/certs/kube-apiserver/kube-apiserver.key 
+    - /home/ubuntu/certs/service-account/service-account.key
+    - /home/ubuntu/certs/service-account/service-account.crt 
+    - /home/ubuntu/certs/etcd-server/etcd-server.key 
+    - /home/ubuntu/certs/etcd-server/etcd-server.crt 
+    
+- name: setup kube-apiserver systemd unit file 
+  template: 
+    src: kube-apiserver.service.j2 
+    dest: /etc/systemd/system/kube-apiserver.service 
+    owner: root
+    group: root 
+
+- name: copy config manager config 
+  copy: 
+    src: /home/ubuntu/kube-controller-manager.kubeconfig
+    dest: /var/lib/kubernetes/
+    remote_src: true 
+
+- name: setup kube-controller-manager systemd unit 
+  template:
+    src: kube-controller-manager.service.j2 
+    dest: /etc/systemd/system/kube-controller-manager.service 
+    owner: root
+    group: root 
+
+- name: copy kube-scheduler config 
+  copy: 
+    src: /home/ubuntu/kube-scheduler.kubeconfig 
+    dest: /var/lib/kubernetes/ 
+    remote_src: true 
+
+
+- name: setup kube-scheduler systemd unit 
+  template: 
+    src: kube-scheduler.service.j2
+    dest: /etc/systemd/system/kube-scheduler.service
+    owner: root
+    group: root 
+
+- name: reload systemd daemon 
+  shell: "sudo systemctl daemon-reload"
+
+- name: start and enable services for kube-apiserver, kcm, and kube-scheduler 
+  service: 
+    name: "{{ item }}"
+    state: started 
+    enabled: true 
+  loop: 
+    - kube-apiserver
+    - kube-controller-manager 
+    - kube-scheduler
+
+

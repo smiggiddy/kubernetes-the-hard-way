@@ -1,0 +1,11 @@
+pre_req_packages: 
+  - ca-certificates 
+  - curl 
+  - gnupg 
+  - lsb-release
+
+docker_packages: 
+  - docker-ce 
+  - docker-ce-cli 
+  - containerd.io 
+  - docker-compose-plugin

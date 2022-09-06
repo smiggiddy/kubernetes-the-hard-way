@@ -1,0 +1,5 @@
+- name: generate needed certs 
+  hosts: localhost 
+  tasks: 
+    - name: generate certs 
+      

@@ -1,0 +1,76 @@
+- name: download etcd file from server 
+  get_url: 
+    url: https://github.com/etcd-io/etcd/releases/download/v3.4.20/etcd-v3.4.20-linux-amd64.tar.gz
+    dest: /home/svc-ansible/
+
+
+
+- name: unpack etcd tar file 
+  unarchive:
+    src: /home/svc-ansible/etcd-v3.4.20-linux-amd64.tar.gz 
+    dest: /home/svc-ansible
+    remote_src: yes 
+
+- name: install etcd stuff 
+  copy: 
+    src: "{{ item }}"
+    dest: /usr/local/bin
+    mode: '0655'
+    remote_src: yes 
+  loop: 
+    - /home/svc-ansible/etcd-v3.4.20-linux-amd64/etcd
+    - /home/svc-ansible/etcd-v3.4.20-linux-amd64/etcdctl
+
+- name: configur the etcd server 
+  file: 
+    path: "{{ item }}"
+    state: directory 
+    owner: root 
+    group: root 
+  loop: 
+    - /etc/etcd 
+    - /var/lib/etcd 
+
+- name: move files to etcd 
+  copy: 
+    src: "{{ item }}" 
+    dest: /etc/etcd 
+    owner: root
+    group: root
+    remote_src: yes
+  loop: 
+    - /home/ubuntu/certs/etcd-server/ 
+    - /home/ubuntu/certs/certificate_authority/ca.crt  
+  
+
+- name: create etcd.service unit file 
+  template: 
+    src: etcd.service.j2 
+    dest: /etc/systemd/system/etcd.service 
+    owner: root 
+    group: root 
+
+  
+- name: reload systemd daemon 
+  shell: "sudo systemctl daemon-reload"
+
+- name: start etcd service 
+  service: 
+    name: etcd 
+    state: started 
+    enabled: yes 
+
+- name: verify etcd cluster members 
+  shell: | 
+    sudo etcdctl member list \
+    --endpoints=https://127.0.0.1:2379 \
+    --cacert=/etc/etcd/ca.crt \
+    --cert=/etc/etcd/etcd-server.crt \
+    --key=/etc/etcd/etcd-server.key
+  register: output 
+
+
+- name: share output of verify command 
+  debug: 
+    var: output.stdout 
+

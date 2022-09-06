@@ -1,0 +1,7 @@
+- name: setup etcd on master nodes 
+  hosts: k8s_cp 
+  become: true 
+  roles: 
+    - etcd 
+
+  

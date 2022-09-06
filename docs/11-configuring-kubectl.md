@@ -1,4 +1,4 @@
-# Configuring kubectl for Remote Access
+kube# Configuring kubectl for Remote Access
 
 In this lab you will generate a kubeconfig file for the `kubectl` command line utility based on the `admin` user credentials.
 
@@ -61,8 +61,8 @@ kubectl get nodes
 
 ```
 NAME       STATUS   ROLES    AGE    VERSION
-worker-1   NotReady    <none>   118s   v1.13.0
-worker-2   NotReady    <none>   118s   v1.13.0
+worker-1   NotReady    <none>   118s   v1.23.0
+worker-2   NotReady    <none>   118s   v1.23.0
 ```
 
 Note: It is OK for the worker node to be in a `NotReady` state. Worker nodes will come into `Ready` state once networking is configured.

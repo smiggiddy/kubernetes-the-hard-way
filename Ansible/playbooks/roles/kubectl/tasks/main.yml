@@ -1,0 +1,29 @@
+- name: ensure pre req packages installed 
+  apt: 
+    pkg: "{{ packages }}"
+    state: present 
+
+- name: download the google cloud signing key 
+  get_url: 
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg 
+    dest: /usr/share/keyrings/kubernetes-archive-keyring.gpg 
+
+- name: load cloud repo 
+  apt_repository: 
+    repo: "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main"
+    state: present 
+
+
+- name: install kubectl 
+  apt: 
+    update_cache: yes 
+    pkg: kubectl 
+
+
+- name: show kubectl version 
+  shell: kubectl version --client
+  register: kube_version 
+
+- name: print kubectl version 
+  debug: 
+    var: kube_version['stdout'] 

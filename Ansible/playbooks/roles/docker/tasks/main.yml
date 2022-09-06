@@ -1,0 +1,50 @@
+# Tasks to install docker engine on k8s worker nodes 
+
+- name: ensure pre req packages installed 
+  apt: 
+    pkg: "{{ pre_req_packages }}"
+    state: present 
+
+- name: make sure gpg folder exists
+  file: 
+    path: /etc/apt/keyrings
+    state: directory 
+
+# thanks to this reddit post for this
+# https://www.reddit.com/r/ansible/comments/u4f3al/my_docker_installation_in_ubuntu_task/
+- name: Remove gpg keys if they exist #otherwise GPG doesn't run if file already exists
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - /etc/apt/keyrings/docker.gpg_armored
+    - /etc/apt/keyrings/docker.gpg
+
+- name: download docker gpg key 
+  get_url:
+    url: https://download.docker.com/linux/ubuntu/gpg 
+    dest: /etc/apt/keyrings/docker.gpg_armored 
+
+- name: De-Armor Docker GPG key
+  shell:  gpg --dearmor < /etc/apt/keyrings/docker.gpg_armored > /etc/apt/keyrings/docker.gpg 
+
+
+# assist from reddit post above 
+- name: setup docker repo 
+  apt_repository: 
+    repo: "deb [arch={{ arch_dict[ansible_architecture] }} signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable" 
+    state: present 
+  vars:
+    arch_dict:
+      "x86_64": "amd64"
+      "aarch64": "arm64"
+      "aarch": "arm64"
+      "armhf": "armhf"
+      "armv7l": "armhf"
+
+
+- name: install docker engine 
+  apt: 
+    pkg: "{{ docker_packages }}"
+    state: present 
+    update_cache: true 

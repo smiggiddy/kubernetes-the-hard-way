@@ -1,0 +1,8 @@
+---
+- name: provision worker nodes 
+  hosts: k8s_workers
+  become: true   
+  roles: 
+    - docker
+
+  
